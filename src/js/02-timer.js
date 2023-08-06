@@ -79,9 +79,9 @@ function visionTimer(delta) {
 function addLeadingZero({ days, hours, minutes, seconds }) { 
     
     days = days.toString().padStart(2, '0');
-     hours = hours.toString().padStart(2, '0');
-     minute = minutes.toString().padStart(2, '0'); 
-     seconds = seconds.toString().padStart(2, '0'); 
+    hours = hours.toString().padStart(2, '0');
+    minutes = minutes.toString().padStart(2, '0'); 
+    seconds = seconds.toString().padStart(2, '0'); 
 
     return { days, hours, minutes, seconds };
 };
