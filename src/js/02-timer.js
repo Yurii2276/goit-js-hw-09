@@ -16,6 +16,7 @@ const refs = {
 let currentDate = new Date();
 let restTime = null;
 let deltaTime = null;
+let intervalId; 
 
 const options = {
     enableTime: true,
@@ -45,13 +46,23 @@ refs.startBtn.addEventListener(`click`, startTimer);
 
 
 function startTimer() {
-  intervalId = setInterval(() => {
-    
-    const deltaTimeObj = convertMs(deltaTime);
-      
-    visionTimer(deltaTimeObj);
-    deltaTime -= 1000; 
-  }, 1000);
+
+  if (deltaTime > 0) {
+    visionTimer(convertMs(deltaTime));
+  
+    intervalId = setInterval(() => {
+      deltaTime -= 1000;
+      const deltaTimeObj = convertMs(deltaTime);
+
+      if (deltaTimeObj.days >= 0) {
+        visionTimer(deltaTimeObj);
+      } else {
+        clearInterval(intervalId);
+        visionTimer(convertMs(0));
+      }
+    }, 1000);
+  }
+  
 };
 
 function convertMs(ms) {

@@ -45,15 +45,22 @@ for (let i = 1; i <= amount; i += 1) {
 
 };
 
+
 function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
-    const shouldResolve = Math.random() > 0.3;
-    if (shouldResolve) {
-          resolve({ position, delay });
-    } else {
-          reject({ position, delay });
-        }
-  }, delay);
-};
+    const intervalId = setInterval(() => {
+      const shouldResolve = Math.random() > 0.3;
+      if (shouldResolve) {
+        clearInterval(intervalId); 
+        resolve({ position, delay });
+      } else {
+        clearInterval(intervalId); 
+        reject({ position, delay });
+      }
+    }, delay);
+  });
+}
+
+
   
   
